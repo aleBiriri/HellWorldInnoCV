@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv;
+package alejandrodovale.hellworldinnocv.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,7 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import alejandrodovale.hellworldinnocv.connection.ConnectionController;
+import alejandrodovale.hellworldinnocv.R;
+import alejandrodovale.hellworldinnocv.controller.Controller;
+import alejandrodovale.hellworldinnocv.model.UserEntity;
 
 public class GetAllActivity extends AppCompatActivity {
 
@@ -43,7 +45,9 @@ public class GetAllActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.w(TAG,"Iniciando petición");
-                ConnectionController.getInstance().getAllUsers(GetAllActivity.this);
+                //Controller.getInstance().getAllUsers(GetAllActivity.this);
+               // Controller.getInstance().getUser(1230);
+                Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"));
             }
         });
     }

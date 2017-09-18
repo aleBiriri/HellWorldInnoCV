@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv.connection;
+package alejandrodovale.hellworldinnocv.controller;
 
 /**
  * Created by Alejandro Dovale on 18/09/2017.

@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv.Model;
+package alejandrodovale.hellworldinnocv.model;
 
 /**
  * Created by Alejandro Dovale on 18/09/2017.

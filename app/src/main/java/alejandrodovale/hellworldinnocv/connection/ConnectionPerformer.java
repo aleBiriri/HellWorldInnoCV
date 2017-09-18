@@ -3,7 +3,8 @@ package alejandrodovale.hellworldinnocv.connection;
 import android.util.Log;
 
 import java.net.HttpURLConnection;
-import java.net.URL;
+
+import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 
 /**
  * Created by Alejandro Dovale on 18/09/2017.
