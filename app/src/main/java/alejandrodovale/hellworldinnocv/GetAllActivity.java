@@ -5,12 +5,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import alejandrodovale.hellworldinnocv.connection.ConnectionController;
 
 public class GetAllActivity extends AppCompatActivity {
 
+    private static final String TAG = GetAllActivity.class.getName() ;
+    private Button getAllB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,20 @@ public class GetAllActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        initInterface();
+
+    }
+
+    private void initInterface() {
+        getAllB = (Button) findViewById(R.id.getAll);
+        getAllB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.w(TAG,"Iniciando petición");
+                ConnectionController.getInstance().getAllUsers(GetAllActivity.this);
             }
         });
     }
