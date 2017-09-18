@@ -47,7 +47,10 @@ public class GetAllActivity extends AppCompatActivity {
                 Log.w(TAG,"Iniciando petición");
                 //Controller.getInstance().getAllUsers(GetAllActivity.this);
                // Controller.getInstance().getUser(1230);
-                Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"));
+                //Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"));
+                //Controller.getInstance().updateUser(new UserEntity(1256,"NUEVO USER3 CON NUEVO NOMBRE","2017-09-16T19:49:04"));
+                Controller.getInstance().removeUser(1254);
+
             }
         });
     }

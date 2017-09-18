@@ -27,7 +27,9 @@ public class Controller {
     public static final String SERVER = "http://hello-world.innocv.com/api/";
     public static final String  GET_ALL_USERS = "user/getall";
     private static final String GET_USER = "user/get/";
-    private static final String CREATE_USER = "user/create" ;
+    private static final String CREATE_USER = "user/create";
+    private static final String UPDATE_USER = "user/update";
+    private static final String REMOVE_USER = "user/remove/" ;
 
     private Controller(){}
 
@@ -78,22 +80,11 @@ public class Controller {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 HttpURLConnection url = buildURL("POST",CREATE_USER);
                 String params = aux.toPOSTParams();
-                byte[] paramBytes = params.getBytes();
-                url.setDoOutput(true);
-                url.setInstanceFollowRedirects(false);
-                url.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
-                url.setRequestProperty( "charset", "utf-8");
-                url.setRequestProperty( "Content-Length", Integer.toString(paramBytes.length));
-                url.setUseCaches(false);
-                try {
-                    DataOutputStream wr = new DataOutputStream( url.getOutputStream());
-                    wr.write(paramBytes);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    url = null;
-                }
+                url = configPOSTUrl(url,params);
+
                 if(url!=null){
                     ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
                         @Override
@@ -114,6 +105,71 @@ public class Controller {
         }).start();
     }
 
+    public void updateUser(UserEntity u){
+        final UserEntity aux = u;
+        /*Debido a que se hace una operacion de red (con el DataOutputStream, debemos crear un nuevo hilo)*/
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                HttpURLConnection url = buildURL("POST",UPDATE_USER);
+                String params = aux.toPOSTParamsWithId();
+                url = configPOSTUrl(url,params);
+
+                if(url!=null){
+                    ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
+                        @Override
+                        public void onSuccess(String respuestaRaw) {
+                            //Convertir dato en JSON
+                            Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
+                            // UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
+                            //   Log.w(TAG,"Se ha recibido el usuario "+user);
+                        }
+                        @Override
+                        public void onError(String error) {
+                            //Mostrar mensaje de error
+                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
+                        }
+                    });
+                }
+            }
+        }).start();
+    }
+
+    public void removeUser(int id){
+        ConnectionPerformer.getInstance().perform(buildURL("GET",REMOVE_USER+id), new FinishedConnectionListener() {
+            @Override
+            public void onSuccess(String respuestaRaw) {
+                //Convertir dato en JSON
+                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
+                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
+                Log.w(TAG,"Se ha recibido el usuario "+user);
+            }
+            @Override
+            public void onError(String error) {
+                //Mostrar mensaje de error
+                Log.w(TAG,"Ha ocurrido un error con la respuesta");
+            }
+        });
+    }
+
+    private HttpURLConnection configPOSTUrl(HttpURLConnection url, String params) {
+        byte[] paramBytes = params.getBytes();
+        url.setDoOutput(true);
+        url.setInstanceFollowRedirects(false);
+        url.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+        url.setRequestProperty( "charset", "utf-8");
+        url.setRequestProperty( "Content-Length", Integer.toString(paramBytes.length));
+        url.setUseCaches(false);
+        try {
+            DataOutputStream wr = new DataOutputStream( url.getOutputStream());
+            wr.write(paramBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            url = null;
+        }
+        return url;
+    }
 
     private HttpURLConnection buildURL(String method,String uri){
         HttpURLConnection url = null;
