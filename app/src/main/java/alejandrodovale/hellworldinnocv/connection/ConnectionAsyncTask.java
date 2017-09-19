@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
  *
  */
 
-public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String>{
+public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String> implements ConnectionDriver{
 
 
     private static final String TAG = ConnectionAsyncTask.class.getName() ;
@@ -39,7 +39,7 @@ public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String
     }
 
     private String getData(HttpURLConnection urlConnection) throws IOException {
-
+        Log.w(TAG,"Pidiendo los datos");
         InputStream inputStream = urlConnection.getInputStream();
         StringBuffer buffer = new StringBuffer();
         BufferedReader reader = null;
@@ -64,8 +64,28 @@ public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String
 
     @Override
     protected void onPostExecute(String respuestaRaw) {
-        super.onPostExecute(respuestaRaw);
+       // super.onPostExecute(respuestaRaw);
         Log.w(TAG,"Se ha terminado la conexión");
         ConnectionPerformer.getInstance().procesarRespuesta(respuestaRaw);
+    }
+
+    public String fetchData (HttpURLConnection... urls){
+        HttpURLConnection url = urls[0];
+        String respuesta = null;
+        try {
+            url.connect();
+            Log.w(TAG,"Se ha abierto y cerrado la conexión");
+            respuesta = getData(url);
+            url.disconnect();
+        } catch (IOException e) {
+            respuesta = ConnectionPerformer.ERROR + " : Ha ocurrido un error con la conexión";
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+
+    @Override
+    public void makeConnection(HttpURLConnection url) {
+        execute(url);
     }
 }

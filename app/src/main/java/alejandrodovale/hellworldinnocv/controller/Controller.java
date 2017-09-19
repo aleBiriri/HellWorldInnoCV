@@ -39,45 +39,36 @@ public class Controller {
         return instance;
     }
 
-    public void getAllUsers(Context activity) {
-        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_ALL_USERS), new FinishedConnectionListener() {
-            @Override
-            public void onSuccess(String respuestaRaw) {
-                //Convertir dato en JSON
-                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-                List<UserEntity> usuarios = UserEntity.fromJSONArray(respuestaRaw);
-                Log.w(TAG,"La lista de usuarios "+usuarios);
-            }
-            @Override
-            public void onError(String error) {
-                //Mostrar mensaje de error
-                Log.w(TAG,"Ha ocurrido un error con la respuesta");
-            }
-        });
-
+    public void getAllUsers(FinishedConnectionListener l){
+        Log.w(TAG,"Pidiendo los usuarios");
+        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_ALL_USERS),l);
     }
 
-    public void getUser(int id){
-        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_USER+id), new FinishedConnectionListener() {
-            @Override
-            public void onSuccess(String respuestaRaw) {
-                //Convertir dato en JSON
-                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-                Log.w(TAG,"Se ha recibido el usuario "+user);
-            }
-            @Override
-            public void onError(String error) {
-                //Mostrar mensaje de error
-                Log.w(TAG,"Ha ocurrido un error con la respuesta");
-            }
-        });
+    public void getUser(int id, FinishedConnectionListener l){
+
+//        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_USER+id), new FinishedConnectionListener() {
+//            @Override
+//            public void onSuccess(String respuestaRaw) {
+//                //Convertir dato en JSON
+//                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
+//                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
+//                Log.w(TAG,"Se ha recibido el usuario "+user);
+//            }
+//            @Override
+//            public void onError(String error) {
+//                //Mostrar mensaje de error
+//                Log.w(TAG,"Ha ocurrido un error con la respuesta");
+//            }
+//        });
+        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_USER+id),l);
     }
 
-    public void createUser(UserEntity u){
+    public void createUser(UserEntity u, FinishedConnectionListener l){
         final UserEntity aux = u;
+        final FinishedConnectionListener li = l;
+
         /*Debido a que se hace una operacion de red (con el DataOutputStream, debemos crear un nuevo hilo)*/
-        new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
 
@@ -86,23 +77,32 @@ public class Controller {
                 url = configPOSTUrl(url,params);
 
                 if(url!=null){
-                    ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
-                        @Override
-                        public void onSuccess(String respuestaRaw) {
-                            //Convertir dato en JSON
-                            Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-                            // UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-                            //   Log.w(TAG,"Se ha recibido el usuario "+user);
-                        }
-                        @Override
-                        public void onError(String error) {
-                            //Mostrar mensaje de error
-                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
-                        }
-                    });
+//                    ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
+//                        @Override
+//                        public void onSuccess(String respuestaRaw) {
+//                            //Convertir dato en JSON
+//                            Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
+//                            // UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
+//                            //   Log.w(TAG,"Se ha recibido el usuario "+user);
+//                        }
+//                        @Override
+//                        public void onError(String error) {
+//                            //Mostrar mensaje de error
+//                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
+//                        }
+//                    });
+                    ConnectionPerformer.getInstance().perform(url, li);
                 }
             }
-        }).start();
+        });
+        t.start();
+        //FOR TESTING
+//        try {
+//            t.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     public void updateUser(UserEntity u){

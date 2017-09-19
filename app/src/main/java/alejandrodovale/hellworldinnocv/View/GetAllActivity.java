@@ -11,11 +11,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.util.List;
+
 import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.controller.Controller;
+import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
+import alejandrodovale.hellworldinnocv.view.fragments.OnListFragmentInteractionListener;
+import alejandrodovale.hellworldinnocv.view.fragments.UserFragment;
+import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
 
-public class GetAllActivity extends AppCompatActivity {
+import static android.content.ContentValues.TAG;
+
+public class GetAllActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
 
     private static final String TAG = GetAllActivity.class.getName() ;
     private Button getAllB;
@@ -40,19 +48,32 @@ public class GetAllActivity extends AppCompatActivity {
     }
 
     private void initInterface() {
-        getAllB = (Button) findViewById(R.id.getAll);
-        getAllB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.w(TAG,"Iniciando petición");
-                //Controller.getInstance().getAllUsers(GetAllActivity.this);
+//        getAllB = (Button) findViewById(R.id.getAll);
+//        getAllB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.w(TAG,"Iniciando petición");
+//                Controller.getInstance().getAllUsers(new FinishedConnectionListener() {
+//                    @Override
+//                    public void onSuccess(String respuestaRaw) {
+//                        //Convertir dato en JSON
+//                        List<UserEntity> usuarios = UserEntity.fromJSONArray(respuestaRaw);
+//                        Log.w(TAG,"La lista de usuarios "+ usuarios);
+//                    }
+//
+//                    @Override
+//                    public void onError(String error) {
+//                        //Mostrar mensaje de error
+//                        Log.w(TAG,"Ha ocurrido un error con la respuesta");
+//                    }
+//                });
                // Controller.getInstance().getUser(1230);
                 //Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"));
                 //Controller.getInstance().updateUser(new UserEntity(1256,"NUEVO USER3 CON NUEVO NOMBRE","2017-09-16T19:49:04"));
-                Controller.getInstance().removeUser(1254);
+               // Controller.getInstance().removeUser(1254);
 
-            }
-        });
+//            }
+//        });
     }
 
     @Override
@@ -75,5 +96,10 @@ public class GetAllActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

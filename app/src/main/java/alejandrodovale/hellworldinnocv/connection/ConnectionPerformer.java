@@ -18,9 +18,15 @@ public class ConnectionPerformer {
     public static final String ERROR = "ERROR";
     private static ConnectionPerformer p;
 
-    private ConnectionPerformer(){};
+    private ConnectionDriver driver;
+
+    private ConnectionPerformer(){
+        //El driver de conección por defecto
+        driver = new ConnectionAsyncTask();
+    }
 
     private FinishedConnectionListener listener;
+
     public static ConnectionPerformer getInstance(){
         if(p == null){
             p = new ConnectionPerformer();
@@ -30,7 +36,7 @@ public class ConnectionPerformer {
 
     public void perform(HttpURLConnection url, FinishedConnectionListener l) {
         listener = l;
-        new ConnectionAsyncTask().execute(url);
+        driver.makeConnection(url);
     }
 
     public void procesarRespuesta(String respuesta){
@@ -43,5 +49,9 @@ public class ConnectionPerformer {
             else
                 listener.onSuccess(respuesta);
         }
+    }
+
+    public void setDriver(ConnectionDriver d){
+        driver = d;
     }
 }

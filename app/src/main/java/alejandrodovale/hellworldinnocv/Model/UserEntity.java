@@ -80,4 +80,8 @@ public class UserEntity extends Entity {
     public String toString() {
         return "Usuario {Id : "+id+" , Nombre : "+nombre+" , Fecha de Nacimiento "+fechaNacimiento+"}";
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
