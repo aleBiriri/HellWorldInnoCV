@@ -1,15 +1,12 @@
-package alejandrodovale.hellworldinnocv.view;
+package alejandrodovale.hellworldinnocv.view.getAll;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import java.util.List;
 
@@ -17,16 +14,13 @@ import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.controller.Controller;
 import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
-import alejandrodovale.hellworldinnocv.view.fragments.OnListFragmentInteractionListener;
-import alejandrodovale.hellworldinnocv.view.fragments.UserFragment;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
-
-import static android.content.ContentValues.TAG;
+import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
+import alejandrodovale.hellworldinnocv.view.userdetails.DetailsActivity;
 
 public class GetAllActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
 
     private static final String TAG = GetAllActivity.class.getName() ;
-    private Button getAllB;
+    private UserFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +28,7 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,12 +36,23 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
                         .setAction("Action", null).show();
             }
         });
-
+*/
         initInterface();
+        initFragment();
 
     }
 
+    private void initFragment() {
+        fragment = new UserFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.frame_fragment, fragment)
+                .commit();
+    }
+
     private void initInterface() {
+        Log.w(TAG,"Iniciando petición");
+        //Llamada no bloqueante
+        fetchData();
 //        getAllB = (Button) findViewById(R.id.getAll);
 //        getAllB.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,15 +96,36 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refrescar) {
+            fetchData();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+    private void fetchData() {
+        Controller.getInstance().getAllUsers(
+                new FinishedConnectionListener() {
+                    @Override
+                    public void onSuccess(String respuestaRaw) {
+                        List<UserEntity> usuarios = UserEntity.fromJSONArray(respuestaRaw);
+                        Log.w(TAG, "La lista de usuarios " + usuarios);
+                        fragment.updateData(usuarios);
+                    }
+                    @Override
+                    public void onError(String error) {
+                        //Mostrar mensaje de error
+                        Log.w(TAG, "Ha ocurrido un error con la respuesta");
+                    }
+                }
+        );
     }
+
+    @Override
+    public void onListFragmentInteraction(UserEntity item) {
+        Intent i = new Intent(this, DetailsActivity.class);
+        startActivity(i);
+    }
+
 }

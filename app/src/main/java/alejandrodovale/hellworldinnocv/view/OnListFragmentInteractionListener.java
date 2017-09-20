@@ -1,7 +1,6 @@
-package alejandrodovale.hellworldinnocv.view.fragments;
+package alejandrodovale.hellworldinnocv.view;
 
 import alejandrodovale.hellworldinnocv.model.UserEntity;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
 
 /**
  * Created by Alejandro Dovale on 19/09/2017.

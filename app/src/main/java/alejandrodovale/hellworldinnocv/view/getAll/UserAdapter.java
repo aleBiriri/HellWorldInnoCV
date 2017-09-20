@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv.view.fragments;
+package alejandrodovale.hellworldinnocv.view.getAll;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
+import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;

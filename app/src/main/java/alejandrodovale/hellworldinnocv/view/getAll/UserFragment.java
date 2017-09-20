@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv.view.fragments;
+package alejandrodovale.hellworldinnocv.view.getAll;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import java.util.List;
 
 import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
+import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
 
 /**
  * A fragment representing a list of Items.
