@@ -3,4 +3,5 @@
     <color name="colorPrimarioRojo">#e41b1e</color>
     <color name="colorSecundarioGrisOscuro">#5d5f66</color>
     <color name="colorTerciarioGrisClaro">#c4c5ce</color>
+    <color name="colorLetrasBlancas">#ffffff</color>
 </resources>

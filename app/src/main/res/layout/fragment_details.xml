@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="alejandrodovale.hellworldinnocv.view.details.DetailsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/contact"
+        android:id="@+id/imageView"
+        android:layout_marginBottom="32dp"
+        android:layout_above="@+id/nombre_details"
+
+        android:layout_marginLeft="40dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Nombre"
+        android:ems="10"
+        android:id="@+id/nombre_details"
+        android:layout_marginLeft="0dp"
+        android:layout_above="@+id/birthday_details"
+        android:layout_alignStart="@+id/birthday_details"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="30dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Fecha Nacimiento"
+        android:ems="10"
+        android:id="@+id/birthday_details"
+        android:layout_marginBottom="112dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginStart="15dp" />
+
+    <Button
+        android:text="Guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guardar_cambios"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="120dp"
+        style="@style/Widget.AppCompat.Button.Colored" />
+</RelativeLayout>

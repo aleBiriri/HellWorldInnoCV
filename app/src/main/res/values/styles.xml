@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/colorPrimarioRojo</item>
         <item name="colorPrimaryDark">@color/colorSecundarioGrisOscuro</item>
         <item name="colorAccent">@color/colorTerciarioGrisClaro</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

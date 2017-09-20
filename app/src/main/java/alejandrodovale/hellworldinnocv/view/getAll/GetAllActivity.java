@@ -14,8 +14,8 @@ import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.controller.Controller;
 import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
+import alejandrodovale.hellworldinnocv.view.details.DetailsActivity;
 import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
-import alejandrodovale.hellworldinnocv.view.userdetails.DetailsActivity;
 
 public class GetAllActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
 
