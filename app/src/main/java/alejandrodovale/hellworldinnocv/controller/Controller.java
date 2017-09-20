@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import alejandrodovale.hellworldinnocv.connection.ConnectionAsyncTask;
 import alejandrodovale.hellworldinnocv.connection.ConnectionPerformer;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 
@@ -41,7 +42,7 @@ public class Controller {
 
     public void getAllUsers(FinishedConnectionListener l){
         Log.w(TAG,"Pidiendo los usuarios");
-        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_ALL_USERS),l);
+        ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(buildURL("GET",GET_ALL_USERS),l);
     }
 
     public void getUser(int id, FinishedConnectionListener l){

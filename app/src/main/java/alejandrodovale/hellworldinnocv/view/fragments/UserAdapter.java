@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import alejandrodovale.hellworldinnocv.R;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent.DummyItem;
+import alejandrodovale.hellworldinnocv.model.UserEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MyUserRecyclerViewAdapter extends RecyclerView.Adapter<MyUserRecyclerViewAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private List<UserEntity> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyUserRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public UserAdapter(List<UserEntity> items, OnListFragmentInteractionListener listener) {
+        if(items == null)
+            mValues = new ArrayList<>();
+        else
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +35,8 @@ public class MyUserRecyclerViewAdapter extends RecyclerView.Adapter<MyUserRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(String.valueOf(holder.mItem.getId()));
+        holder.mNombreView.setText(mValues.get(position).getNombre());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,22 +55,26 @@ public class MyUserRecyclerViewAdapter extends RecyclerView.Adapter<MyUserRecycl
         return mValues.size();
     }
 
+    public void updateValues(List<UserEntity> usuarios) {
+        mValues = usuarios;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mNombreView;
+        public UserEntity mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mNombreView = (TextView) view.findViewById(R.id.nombre);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNombreView.getText() + "'";
         }
     }
 }

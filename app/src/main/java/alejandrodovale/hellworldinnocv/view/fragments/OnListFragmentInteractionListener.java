@@ -1,5 +1,6 @@
 package alejandrodovale.hellworldinnocv.view.fragments;
 
+import alejandrodovale.hellworldinnocv.model.UserEntity;
 import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
 
 /**
@@ -8,6 +9,6 @@ import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
 
 public interface OnListFragmentInteractionListener {
 
-    void onListFragmentInteraction(DummyContent.DummyItem item);
+    void onListFragmentInteraction(UserEntity item);
 }
 

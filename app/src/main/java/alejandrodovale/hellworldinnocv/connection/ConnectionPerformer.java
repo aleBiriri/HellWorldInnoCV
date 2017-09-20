@@ -20,10 +20,7 @@ public class ConnectionPerformer {
 
     private ConnectionDriver driver;
 
-    private ConnectionPerformer(){
-        //El driver de conección por defecto
-        driver = new ConnectionAsyncTask();
-    }
+    private ConnectionPerformer(){}
 
     private FinishedConnectionListener listener;
 
@@ -36,7 +33,8 @@ public class ConnectionPerformer {
 
     public void perform(HttpURLConnection url, FinishedConnectionListener l) {
         listener = l;
-        driver.makeConnection(url);
+        if(driver != null)
+            driver.makeConnection(url);
     }
 
     public void procesarRespuesta(String respuesta){
@@ -51,7 +49,8 @@ public class ConnectionPerformer {
         }
     }
 
-    public void setDriver(ConnectionDriver d){
+    public ConnectionPerformer setDriver(ConnectionDriver d){
         driver = d;
+        return this;
     }
 }

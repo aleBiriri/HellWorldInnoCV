@@ -9,12 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import alejandrodovale.hellworldinnocv.R;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
-import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent.DummyItem;
+import android.widget.ListView;
 
 import java.util.List;
+
+import alejandrodovale.hellworldinnocv.R;
+import alejandrodovale.hellworldinnocv.model.UserEntity;
+import alejandrodovale.hellworldinnocv.view.fragments.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -24,27 +25,15 @@ import java.util.List;
  */
 public class UserFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+    private static final String TAG = UserFragment.class.getName() ;
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private UserAdapter adapter;
+    private ListView listView;
+    private RecyclerView recycler;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public UserFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static UserFragment newInstance(int columnCount) {
-        UserFragment fragment = new UserFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -61,20 +50,34 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
 
-        // Set the adapter
+        recycler = (RecyclerView) view.findViewById(R.id.recycler_view);
+        if (mColumnCount <= 1) {
+            recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            recycler.setLayoutManager(new GridLayoutManager(getContext(), mColumnCount));
+        }
+        adapter = new UserAdapter(null, mListener);
+        recycler.setAdapter(adapter);
+      /*  // Set the adapter
         if (view instanceof RecyclerView) {
+            Log.w(TAG,"Es un recyvler");
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyUserRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
+
+
+        }*/
         return view;
     }
 
+  /*  @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        List<DummyContent.DummyItem> list = DummyContent.ITEMS;
+        Log.w(TAG,"La lista "+list);
+        adapter = new UserAdapter(list, (OnListFragmentInteractionListener) getActivity());
+        listView.setAdapter(adapter);
+        adapter = null;
+    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -93,4 +96,8 @@ public class UserFragment extends Fragment {
         mListener = null;
     }
 
+    public void updateData(List<UserEntity> usuarios) {
+        adapter.updateValues(usuarios);
+        adapter.notifyDataSetChanged();
+    }
 }

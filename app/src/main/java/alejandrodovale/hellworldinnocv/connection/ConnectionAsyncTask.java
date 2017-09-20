@@ -20,7 +20,6 @@ public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String
 
 
     private static final String TAG = ConnectionAsyncTask.class.getName() ;
-
     @Override
     protected String doInBackground(HttpURLConnection... urls) {
         //Realizar conexión
@@ -67,6 +66,7 @@ public class ConnectionAsyncTask extends AsyncTask<HttpURLConnection,Void,String
        // super.onPostExecute(respuestaRaw);
         Log.w(TAG,"Se ha terminado la conexión");
         ConnectionPerformer.getInstance().procesarRespuesta(respuestaRaw);
+        ConnectionPerformer.getInstance().setDriver(null);
     }
 
     public String fetchData (HttpURLConnection... urls){

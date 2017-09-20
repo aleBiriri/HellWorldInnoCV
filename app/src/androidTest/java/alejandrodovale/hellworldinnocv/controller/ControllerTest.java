@@ -55,7 +55,7 @@ public class ControllerTest extends AndroidTestCase{
             }
         };
 
-        Controller.getInstance().getAllUsers(null, l);
+        Controller.getInstance().getAllUsers(l);
     }
 
     @Test

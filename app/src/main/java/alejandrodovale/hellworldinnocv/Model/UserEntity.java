@@ -84,4 +84,8 @@ public class UserEntity extends Entity {
     public String getNombre() {
         return nombre;
     }
+
+    public int getId() {
+        return id;
+    }
 }

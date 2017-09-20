@@ -28,9 +28,15 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/getAll" />
         -->
-    <fragment android:name="alejandrodovale.hellworldinnocv.view.fragments.UserFragment"
+    <!--<fragment android:name="alejandrodovale.hellworldinnocv.view.fragments.UserFragment"
         android:id="@+id/list_usuarios_fragment"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
+        -->
+    <FrameLayout
+        android:id="@+id/frame_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </RelativeLayout>
