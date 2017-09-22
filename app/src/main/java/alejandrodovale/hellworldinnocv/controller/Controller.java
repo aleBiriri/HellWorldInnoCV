@@ -67,7 +67,7 @@ public class Controller {
     public void createUser(UserEntity u, FinishedConnectionListener l){
         final UserEntity aux = u;
         final FinishedConnectionListener li = l;
-
+        Log.w(TAG,"Creando usuario");
         /*Debido a que se hace una operacion de red (con el DataOutputStream, debemos crear un nuevo hilo)*/
         Thread t = new Thread(new Runnable() {
             @Override
@@ -92,7 +92,7 @@ public class Controller {
 //                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
 //                        }
 //                    });
-                    ConnectionPerformer.getInstance().perform(url, li);
+                    ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(url, li);
                 }
             }
         });
@@ -137,21 +137,25 @@ public class Controller {
         }).start();
     }
 
-    public void removeUser(int id){
-        ConnectionPerformer.getInstance().perform(buildURL("GET",REMOVE_USER+id), new FinishedConnectionListener() {
-            @Override
-            public void onSuccess(String respuestaRaw) {
-                //Convertir dato en JSON
-                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-                Log.w(TAG,"Se ha recibido el usuario "+user);
-            }
-            @Override
-            public void onError(String error) {
-                //Mostrar mensaje de error
-                Log.w(TAG,"Ha ocurrido un error con la respuesta");
-            }
-        });
+    public void removeUser(int id,FinishedConnectionListener l){
+
+        ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(buildURL("GET",REMOVE_USER+id),l);
+//
+//        new FinishedConnectionListener() {
+//            @Override
+//            public void onSuccess(String respuestaRaw) {
+//                //Convertir dato en JSON
+//                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
+//                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
+//                Log.w(TAG,"Se ha recibido el usuario "+user);
+//            }
+//            @Override
+//            public void onError(String error) {
+//                //Mostrar mensaje de error
+//                Log.w(TAG,"Ha ocurrido un error con la respuesta");
+//            }
+//        });
+
     }
 
     private HttpURLConnection configPOSTUrl(HttpURLConnection url, String params) {

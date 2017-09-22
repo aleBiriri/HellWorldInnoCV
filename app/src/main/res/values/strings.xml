@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">HelloWorldInnoCV</string>
     <string name="action_refrescar_string">Actualizar</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_details">Detalles Usuario</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_new_user_actvity">Nuevo usuario</string>
+
+    <string name="textView_Nombre">Nombre</string>
+    <string name="textView_Birthday">Cumpleaños</string>
+
+    <string name="confirm_borrar">¿Desea borrar el usuario?</string>
 </resources>

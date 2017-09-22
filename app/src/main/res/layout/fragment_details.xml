@@ -17,31 +17,6 @@
 
         android:layout_marginLeft="40dp"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Nombre"
-        android:ems="10"
-        android:id="@+id/nombre_details"
-        android:layout_marginLeft="0dp"
-        android:layout_above="@+id/birthday_details"
-        android:layout_alignStart="@+id/birthday_details"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="30dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Fecha Nacimiento"
-        android:ems="10"
-        android:id="@+id/birthday_details"
-        android:layout_marginBottom="112dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/imageView"
-        android:layout_marginStart="15dp" />
-
     <Button
         android:text="Guardar"
         android:layout_width="wrap_content"
@@ -50,4 +25,51 @@
         android:layout_marginTop="480dp"
         android:layout_marginLeft="120dp"
         style="@style/Widget.AppCompat.Button.Colored" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nombre_details"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="42dp"
+        android:layout_above="@+id/birthday_details"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/birthday_details"
+        android:layout_marginBottom="73dp"
+        android:layout_alignBottom="@+id/guardar_cambios"
+        android:layout_alignStart="@+id/nombre_details" />
+
+    <TextView
+        android:text="@string/textView_Nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:id="@+id/textNombre"
+        android:layout_alignBaseline="@+id/nombre_details"
+        android:layout_alignBottom="@+id/nombre_details"
+        android:layout_alignParentStart="true"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        android:textColorLink="@color/colorSecundarioGrisOscuro"
+        android:textColor="@color/colorSecundarioGrisOscuro" />
+
+    <TextView
+        android:text="@string/textView_Birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textBirthday"
+        android:layout_alignBaseline="@+id/birthday_details"
+        android:layout_alignBottom="@+id/birthday_details"
+        android:layout_alignStart="@+id/textNombre"
+        android:textColorLink="@color/colorSecundarioGrisOscuro"
+        android:textColor="@color/colorSecundarioGrisOscuro"
+        style="@android:style/Widget.DeviceDefault.Light.TextView" />
 </RelativeLayout>

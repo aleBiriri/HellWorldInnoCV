@@ -98,6 +98,6 @@ public class UserFragment extends Fragment {
 
     public void updateData(List<UserEntity> usuarios) {
         adapter.updateValues(usuarios);
-        adapter.notifyDataSetChanged();
+       // adapter.notifyDataSetChanged();
     }
 }

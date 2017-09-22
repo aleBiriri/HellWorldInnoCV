@@ -57,7 +57,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public void updateValues(List<UserEntity> usuarios) {
-        mValues = usuarios;
+        mValues.clear();
+        mValues.addAll(usuarios);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

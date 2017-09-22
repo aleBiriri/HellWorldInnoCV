@@ -11,7 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import alejandrodovale.hellworldinnocv.connection.ConnectionAsyncTask;
 import alejandrodovale.hellworldinnocv.connection.ConnectionDriver;
@@ -101,5 +105,11 @@ public class ControllerTest extends AndroidTestCase{
         Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"),l);
     }
 
-    //...
+    @Test
+    public void testTimeFormat(){
+        Date d = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getDefault());
+        Log.w(TAG,"Date "+dateFormat.format(d));
+    }
 }

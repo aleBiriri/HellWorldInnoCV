@@ -2,11 +2,15 @@ package alejandrodovale.hellworldinnocv.view.getAll;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.List;
 
@@ -16,11 +20,14 @@ import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 import alejandrodovale.hellworldinnocv.view.details.DetailsActivity;
 import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
+import alejandrodovale.hellworldinnocv.view.newuser.NewUserActivity;
 
 public class GetAllActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
 
     private static final String TAG = GetAllActivity.class.getName() ;
     private UserFragment fragment;
+    private SwipeRefreshLayout layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,19 +35,36 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+               */
+                startActivity(new Intent(GetAllActivity.this,NewUserActivity.class));
             }
         });
-*/
+
         initInterface();
         initFragment();
+        initSwipeLayout();
 
     }
+
+    private void initSwipeLayout() {
+
+        SwipeRefreshLayout.OnRefreshListener l = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchData();
+            }
+        };
+
+        layout = (SwipeRefreshLayout) findViewById(R.id.frame_fragment);
+        layout.setOnRefreshListener(l);
+    }
+
 
     private void initFragment() {
         fragment = new UserFragment();
@@ -82,6 +106,13 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(fragment == null)
+            initFragment();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_get_all, menu);
@@ -89,20 +120,10 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_refrescar) {
-            fetchData();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public boolean onPrepareOptionsMenu (Menu menu) {
+        return false;
     }
+
 
     private void fetchData() {
         Controller.getInstance().getAllUsers(
@@ -112,7 +133,9 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
                         List<UserEntity> usuarios = UserEntity.fromJSONArray(respuestaRaw);
                         Log.w(TAG, "La lista de usuarios " + usuarios);
                         fragment.updateData(usuarios);
+                        layout.setRefreshing(false);
                     }
+
                     @Override
                     public void onError(String error) {
                         //Mostrar mensaje de error
@@ -125,6 +148,7 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
     @Override
     public void onListFragmentInteraction(UserEntity item) {
         Intent i = new Intent(this, DetailsActivity.class);
+        i.putExtra(DetailsActivity.EXTRA_USUARIO,item);
         startActivity(i);
     }
 

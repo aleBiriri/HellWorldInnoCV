@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="alejandrodovale.hellworldinnocv.view.details.DetailsActivity">
+    tools:context="alejandrodovale.hellworldinnocv.view.newuser.NewUserActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,21 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <ImageView
-                android:id="@+id/borrar_usuario"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:src="@mipmap/delete2"
-                android:clickable="true"/>
-
-        </android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_details" />
+    <include layout="@layout/content_new_user_actvity" />
 
    <!-- <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

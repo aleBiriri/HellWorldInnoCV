@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,11 @@ import java.util.List;
  * Created by Alejandro Dovale on 18/09/2017.
  */
 
-public class UserEntity extends Entity {
+public class UserEntity implements Serializable, Entity{
 
     private final int id;
-    private final String nombre;
-    private final String fechaNacimiento;
+    private  String nombre;
+    private  String fechaNacimiento;
 
     private static final String ID = "id";
     private static final String NAME = "name";
@@ -31,6 +32,10 @@ public class UserEntity extends Entity {
         id = identificador;
         nombre = name;
         fechaNacimiento = fecha;
+    }
+
+    public UserEntity() {
+        id = -1;
     }
 
     public static List<UserEntity> fromJSONArray(String respuestaRaw) {
@@ -87,5 +92,17 @@ public class UserEntity extends Entity {
 
     public int getId() {
         return id;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }
