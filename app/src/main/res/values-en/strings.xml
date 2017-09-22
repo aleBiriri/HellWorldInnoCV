@@ -7,4 +7,7 @@
     <string name="textView_Birthday">Birthday</string>
 
     <string name="confirm_borrar">Do you want to delete user?</string>
+    <string name="title_dialogo_buscar">Buscar usuario</string>
+    <string name="message_dialogo_buscar">Introduzca el id del usuario</string>
+    <string name="buscar">Buscar</string>
 </resources>

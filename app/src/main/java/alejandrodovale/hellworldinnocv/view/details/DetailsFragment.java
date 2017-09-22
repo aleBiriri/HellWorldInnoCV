@@ -91,6 +91,7 @@ public class DetailsFragment extends Fragment {
                 String fecha  = fechaV.getText().toString();
 
                 UserEntity usr = (usuario == null)? new UserEntity():usuario;
+
                 if(nombre != null)
                     usr.setNombre(nombre);
                 if(fecha != null)

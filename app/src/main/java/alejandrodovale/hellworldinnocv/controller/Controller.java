@@ -61,7 +61,7 @@ public class Controller {
 //                Log.w(TAG,"Ha ocurrido un error con la respuesta");
 //            }
 //        });
-        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_USER+id),l);
+        ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(buildURL("GET",GET_USER+id),l);
     }
 
     public void createUser(UserEntity u, FinishedConnectionListener l){
@@ -106,8 +106,9 @@ public class Controller {
 
     }
 
-    public void updateUser(UserEntity u){
+    public void updateUser(UserEntity u,FinishedConnectionListener l){
         final UserEntity aux = u;
+        final FinishedConnectionListener auxL = l;
         /*Debido a que se hace una operacion de red (con el DataOutputStream, debemos crear un nuevo hilo)*/
         new Thread(new Runnable() {
             @Override
@@ -118,21 +119,9 @@ public class Controller {
                 url = configPOSTUrl(url,params);
 
                 if(url!=null){
-                    ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
-                        @Override
-                        public void onSuccess(String respuestaRaw) {
-                            //Convertir dato en JSON
-                            Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-                            // UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-                            //   Log.w(TAG,"Se ha recibido el usuario "+user);
-                        }
-                        @Override
-                        public void onError(String error) {
-                            //Mostrar mensaje de error
-                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
-                        }
-                    });
+                    ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(url,auxL);
                 }
+
             }
         }).start();
     }

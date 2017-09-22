@@ -12,10 +12,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import alejandrodovale.hellworldinnocv.R;
+import alejandrodovale.hellworldinnocv.controller.Controller;
+import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 import alejandrodovale.hellworldinnocv.view.getAll.UserFragment;
+import alejandrodovale.hellworldinnocv.view.newuser.NewUserActivity;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsFragment.OnFragmentInteractionListener{
 
@@ -84,6 +88,20 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
 
     private void borrarUsuario() {
 
+        FinishedConnectionListener l = new FinishedConnectionListener() {
+            @Override
+            public void onSuccess(String respuestaRaw) {
+                Toast.makeText(DetailsActivity.this,"Usuario eliminado correctamente",Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        };
+
+        Controller.getInstance().removeUser(fragment.getUsuario().getId(),l);
     }
 
     private void initFragment() {
@@ -99,5 +117,19 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
     @Override
     public void onFragmentInteraction(UserEntity user) {
 
+        FinishedConnectionListener l = new FinishedConnectionListener() {
+            @Override
+            public void onSuccess(String respuestaRaw) {
+                Toast.makeText(DetailsActivity.this,"Usuario actualizado correctamente", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(DetailsActivity.this,"Ha habido un error actualizando el usuario", Toast.LENGTH_LONG).show();
+            }
+        };
+
+        Controller.getInstance().updateUser(user,l);
     }
+
 }

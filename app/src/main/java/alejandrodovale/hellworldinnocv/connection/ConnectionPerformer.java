@@ -39,14 +39,14 @@ public class ConnectionPerformer {
 
     public void procesarRespuesta(String respuesta){
         Log.w(TAG, "Se va a entregar la respuesta al controlador " +respuesta);
-        if(respuesta==null)
-            Log.w(TAG,"La respuesta es null");
-        else{
-            if(respuesta.startsWith(ERROR))
-                listener.onError(respuesta);
-            else
-                listener.onSuccess(respuesta);
+
+        if(respuesta!=null&&respuesta.startsWith(ERROR)){
+            listener.onError(respuesta);
         }
+        else{
+            listener.onSuccess(respuesta);
+        }
+
     }
 
     public ConnectionPerformer setDriver(ConnectionDriver d){

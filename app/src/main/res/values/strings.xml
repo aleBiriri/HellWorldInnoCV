@@ -10,4 +10,9 @@
     <string name="textView_Birthday">Cumpleaños</string>
 
     <string name="confirm_borrar">¿Desea borrar el usuario?</string>
+    <string name="title_activity_buscar">BuscarActivity</string>
+    <string name="title_dialogo_buscar">Buscar usuario</string>
+    <string name="message_dialogo_buscar">Introduzca el id del usuario</string>
+    <string name="buscar">Buscar</string>
+    <string name="espere_un_momento">Espere un momento por favor</string>
 </resources>
