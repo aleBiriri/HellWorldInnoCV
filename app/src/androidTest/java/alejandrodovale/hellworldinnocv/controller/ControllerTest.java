@@ -1,8 +1,5 @@
 package alejandrodovale.hellworldinnocv.controller;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -17,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import alejandrodovale.hellworldinnocv.connection.ConnectionAsyncTask;
-import alejandrodovale.hellworldinnocv.connection.ConnectionDriver;
-import alejandrodovale.hellworldinnocv.connection.ConnectionPerformer;
+import alejandrodovale.hellworldinnocv.controller.connection.ConnectionAsyncTask;
+import alejandrodovale.hellworldinnocv.controller.connection.ConnectionDriver;
+import alejandrodovale.hellworldinnocv.controller.connection.ConnectionPerformer;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 
 import static android.content.ContentValues.TAG;

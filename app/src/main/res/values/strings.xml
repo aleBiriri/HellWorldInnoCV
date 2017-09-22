@@ -15,4 +15,9 @@
     <string name="message_dialogo_buscar">Introduzca el id del usuario</string>
     <string name="buscar">Buscar</string>
     <string name="espere_un_momento">Espere un momento por favor</string>
+    <string name="error_cargar_datos">Lo sentimos, ha ocurrido un error al cargar los datos</string>
+    <string name="no_existe_usuario">No existe el usuario</string>
+    <string name="error_buscar_usuario">Error al buscar el usuario</string>
+    <string name="usuario_creado_correctamente">Nuevo usuario creado correctamente</string>
+    <string name="warning_creacion_usuario">Advertencia : Fecha con formato incorrecto. Usuario creado con fecha de nacimiento predeteminada</string>
 </resources>

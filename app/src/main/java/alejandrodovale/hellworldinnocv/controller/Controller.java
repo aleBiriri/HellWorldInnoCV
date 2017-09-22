@@ -1,17 +1,14 @@
 package alejandrodovale.hellworldinnocv.controller;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 
-import alejandrodovale.hellworldinnocv.connection.ConnectionAsyncTask;
-import alejandrodovale.hellworldinnocv.connection.ConnectionPerformer;
+import alejandrodovale.hellworldinnocv.controller.connection.ConnectionAsyncTask;
+import alejandrodovale.hellworldinnocv.controller.connection.ConnectionPerformer;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 
 import static android.content.ContentValues.TAG;
@@ -46,21 +43,6 @@ public class Controller {
     }
 
     public void getUser(int id, FinishedConnectionListener l){
-
-//        ConnectionPerformer.getInstance().perform(buildURL("GET",GET_USER+id), new FinishedConnectionListener() {
-//            @Override
-//            public void onSuccess(String respuestaRaw) {
-//                //Convertir dato en JSON
-//                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-//                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-//                Log.w(TAG,"Se ha recibido el usuario "+user);
-//            }
-//            @Override
-//            public void onError(String error) {
-//                //Mostrar mensaje de error
-//                Log.w(TAG,"Ha ocurrido un error con la respuesta");
-//            }
-//        });
         ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(buildURL("GET",GET_USER+id),l);
     }
 
@@ -78,20 +60,6 @@ public class Controller {
                 url = configPOSTUrl(url,params);
 
                 if(url!=null){
-//                    ConnectionPerformer.getInstance().perform(url, new FinishedConnectionListener() {
-//                        @Override
-//                        public void onSuccess(String respuestaRaw) {
-//                            //Convertir dato en JSON
-//                            Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-//                            // UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-//                            //   Log.w(TAG,"Se ha recibido el usuario "+user);
-//                        }
-//                        @Override
-//                        public void onError(String error) {
-//                            //Mostrar mensaje de error
-//                            Log.w(TAG,"Ha ocurrido un error con la respuesta");
-//                        }
-//                    });
                     ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(url, li);
                 }
             }
@@ -127,24 +95,7 @@ public class Controller {
     }
 
     public void removeUser(int id,FinishedConnectionListener l){
-
         ConnectionPerformer.getInstance().setDriver(new ConnectionAsyncTask()).perform(buildURL("GET",REMOVE_USER+id),l);
-//
-//        new FinishedConnectionListener() {
-//            @Override
-//            public void onSuccess(String respuestaRaw) {
-//                //Convertir dato en JSON
-//                Log.w(TAG,"Se ha recibido con éxito la respuesta "+respuestaRaw);
-//                UserEntity user = UserEntity.fromJSONObject(respuestaRaw);
-//                Log.w(TAG,"Se ha recibido el usuario "+user);
-//            }
-//            @Override
-//            public void onError(String error) {
-//                //Mostrar mensaje de error
-//                Log.w(TAG,"Ha ocurrido un error con la respuesta");
-//            }
-//        });
-
     }
 
     private HttpURLConnection configPOSTUrl(HttpURLConnection url, String params) {

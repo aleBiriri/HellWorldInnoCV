@@ -1,4 +1,4 @@
-package alejandrodovale.hellworldinnocv.connection;
+package alejandrodovale.hellworldinnocv.controller.connection;
 
 import java.net.HttpURLConnection;
 

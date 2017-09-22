@@ -9,13 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.List;
 
 import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
-import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
 
 /**
  * A fragment representing a list of Items.
@@ -30,7 +28,6 @@ public class UserFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private UserAdapter adapter;
-    private ListView listView;
     private RecyclerView recycler;
 
     public UserFragment() {
@@ -58,26 +55,9 @@ public class UserFragment extends Fragment {
         }
         adapter = new UserAdapter(null, mListener);
         recycler.setAdapter(adapter);
-      /*  // Set the adapter
-        if (view instanceof RecyclerView) {
-            Log.w(TAG,"Es un recyvler");
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
 
-
-        }*/
         return view;
     }
-
-  /*  @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        List<DummyContent.DummyItem> list = DummyContent.ITEMS;
-        Log.w(TAG,"La lista "+list);
-        adapter = new UserAdapter(list, (OnListFragmentInteractionListener) getActivity());
-        listView.setAdapter(adapter);
-        adapter = null;
-    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -98,6 +78,10 @@ public class UserFragment extends Fragment {
 
     public void updateData(List<UserEntity> usuarios) {
         adapter.updateValues(usuarios);
-       // adapter.notifyDataSetChanged();
+    }
+
+    public interface OnListFragmentInteractionListener {
+
+        void onListFragmentInteraction(UserEntity item);
     }
 }

@@ -5,13 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import alejandrodovale.hellworldinnocv.R;
@@ -23,8 +21,6 @@ import alejandrodovale.hellworldinnocv.view.details.DetailsFragment;
 
 public class NewUserActivity extends AppCompatActivity implements DetailsFragment.OnFragmentInteractionListener  {
 
-    private static final String MENSAJE_CORRECTO = "Nuevo usuario creado correctamente" ;
-    private static final String MENSAJE_WARNING = "Advertencia : Fecha con formato incorrecto. Usuario creado con fecha de nacimiento predeteminada." ;
     private static final String TAG = NewUserActivity.class.getName() ;
     private DetailsFragment fragment;
 
@@ -37,15 +33,6 @@ public class NewUserActivity extends AppCompatActivity implements DetailsFragmen
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         initFragment();
     }
@@ -83,13 +70,15 @@ public class NewUserActivity extends AppCompatActivity implements DetailsFragmen
             @Override
             public void onSuccess(String respuestaRaw) {
                 Log.w(TAG,"Se ha creado correctamente el usuario");
-                String mensaje = auxWarningFecha?(MENSAJE_WARNING):MENSAJE_CORRECTO;
+                String mensaje = auxWarningFecha?(getString(R.string.warning_creacion_usuario)):getString(R.string.usuario_creado_correctamente);
                 Toast.makeText(NewUserActivity.this,mensaje,Toast.LENGTH_LONG).show();
+                finish();
             }
 
             @Override
             public void onError(String error) {
                 Toast.makeText(NewUserActivity.this,"Error al crear el usuario",Toast.LENGTH_LONG).show();
+                finish();
             }
         };
 

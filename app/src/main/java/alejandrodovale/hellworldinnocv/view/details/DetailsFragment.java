@@ -1,7 +1,6 @@
 package alejandrodovale.hellworldinnocv.view.details;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import alejandrodovale.hellworldinnocv.R;
-import alejandrodovale.hellworldinnocv.model.Entity;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 
 /**
@@ -41,13 +39,12 @@ public class DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static DetailsFragment newInstance(Entity entity) {
-        UserEntity u = (UserEntity) entity;
+    public static DetailsFragment newInstance(UserEntity entity) {
 
         DetailsFragment fragment = new DetailsFragment();
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_USUARIO,u);
+        args.putSerializable(ARG_USUARIO,entity);
 
         fragment.setArguments(args);
 

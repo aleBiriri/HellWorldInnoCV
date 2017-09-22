@@ -3,9 +3,7 @@ package alejandrodovale.hellworldinnocv.view.getAll;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,15 +25,13 @@ import alejandrodovale.hellworldinnocv.controller.Controller;
 import alejandrodovale.hellworldinnocv.controller.FinishedConnectionListener;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
 import alejandrodovale.hellworldinnocv.view.details.DetailsActivity;
-import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
 import alejandrodovale.hellworldinnocv.view.newuser.NewUserActivity;
 
-public class GetAllActivity extends AppCompatActivity implements OnListFragmentInteractionListener {
+public class GetAllActivity extends AppCompatActivity implements UserFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = GetAllActivity.class.getName() ;
     private UserFragment fragment;
     private SwipeRefreshLayout layout;
-    private ProgressBar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,36 +78,7 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
     private void initInterface() {
         Log.w(TAG,"Iniciando petición");
         //Llamada no bloqueante
-
-        bar = (ProgressBar) findViewById(R.id.barra_progreso);
-
         fetchData();
-//        getAllB = (Button) findViewById(R.id.getAll);
-//        getAllB.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.w(TAG,"Iniciando petición");
-//                Controller.getInstance().getAllUsers(new FinishedConnectionListener() {
-//                    @Override
-//                    public void onSuccess(String respuestaRaw) {
-//                        //Convertir dato en JSON
-//                        List<UserEntity> usuarios = UserEntity.fromJSONArray(respuestaRaw);
-//                        Log.w(TAG,"La lista de usuarios "+ usuarios);
-//                    }
-//
-//                    @Override
-//                    public void onError(String error) {
-//                        //Mostrar mensaje de error
-//                        Log.w(TAG,"Ha ocurrido un error con la respuesta");
-//                    }
-//                });
-               // Controller.getInstance().getUser(1230);
-                //Controller.getInstance().createUser(new UserEntity(-1,"NUEVO USER3","2017-09-16T19:49:04"));
-                //Controller.getInstance().updateUser(new UserEntity(1256,"NUEVO USER3 CON NUEVO NOMBRE","2017-09-16T19:49:04"));
-               // Controller.getInstance().removeUser(1254);
-
-//            }
-//        });
     }
 
 
@@ -165,13 +132,13 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
                             iniciarActivityDetalle(u);
                         }
                         else {
-                            Toast.makeText(GetAllActivity.this, "No existe el usuario", Toast.LENGTH_LONG).show();
+                            Toast.makeText(GetAllActivity.this, R.string.no_existe_usuario, Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onError(String error) {
-                        Toast.makeText(GetAllActivity.this,"Error al buscar usuario",Toast.LENGTH_LONG).show();
+                        Toast.makeText(GetAllActivity.this,R.string.error_buscar_usuario,Toast.LENGTH_LONG).show();
                     }
                 };
 
@@ -206,8 +173,9 @@ public class GetAllActivity extends AppCompatActivity implements OnListFragmentI
 
                     @Override
                     public void onError(String error) {
-                        //Mostrar mensaje de error
-                        Log.w(TAG, "Ha ocurrido un error con la respuesta");
+                        Log.w(TAG, "Ha ocurrido un error al cargar los datos");
+                        Toast.makeText(GetAllActivity.this,R.string.error_cargar_datos,Toast.LENGTH_LONG).show();
+
                     }
                 }
         );

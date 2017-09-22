@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import alejandrodovale.hellworldinnocv.R;
 import alejandrodovale.hellworldinnocv.model.UserEntity;
-import alejandrodovale.hellworldinnocv.view.OnListFragmentInteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,9 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private List<UserEntity> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final UserFragment.OnListFragmentInteractionListener mListener;
 
-    public UserAdapter(List<UserEntity> items, OnListFragmentInteractionListener listener) {
+    public UserAdapter(List<UserEntity> items, UserFragment.OnListFragmentInteractionListener listener) {
         if(items == null)
             mValues = new ArrayList<>();
         else
@@ -49,6 +48,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 }
             }
         });
+
+
     }
 
     @Override

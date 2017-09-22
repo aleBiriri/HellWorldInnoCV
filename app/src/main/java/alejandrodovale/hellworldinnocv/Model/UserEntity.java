@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Alejandro Dovale on 18/09/2017.
  */
 
-public class UserEntity implements Serializable, Entity{
+public class UserEntity implements Serializable {
 
     private final int id;
     private  String nombre;
