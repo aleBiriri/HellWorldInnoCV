@@ -1,13 +1,17 @@
-#HellWorldInnoCV
+HellWorldInnoCV
+===============
 
-##Features##
+Features
+--------
+
 * All API REST operations 
 * Server error handling
 * Unit testing
 * Multi-lenguage support
 * Material theme used
 
-##Others##
+Others
+------
 * Swipe-to-refresh pattern implemented (GetAllActivity)
 * MVC architecture
 * App with corporate colors (based on InnoCV web)
