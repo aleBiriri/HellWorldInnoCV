@@ -38,7 +38,7 @@ public class ConnectionPerformer {
     }
 
     public void procesarRespuesta(String respuesta){
-        Log.w(TAG, "Se va a entregar la respuesta al controlador " +respuesta);
+        Log.w(TAG, "Se va a entregar la respuesta" +respuesta);
 
         if(respuesta!=null&&respuesta.startsWith(ERROR)){
             listener.onError(respuesta);
