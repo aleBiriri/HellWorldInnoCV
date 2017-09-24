@@ -18,17 +18,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private final UserFragment.OnListFragmentInteractionListener mListener;
 
     public UserAdapter(List<UserEntity> items, UserFragment.OnListFragmentInteractionListener listener) {
+
         if(items == null)
             mValues = new ArrayList<>();
         else
-        mValues = items;
+            mValues = items;
+
         mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_user, parent, false);
+                .inflate(R.layout.fila, parent, false);
         return new ViewHolder(view);
     }
 
@@ -72,8 +74,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mNombreView = (TextView) view.findViewById(R.id.nombre);
+            mIdView = (TextView) view.findViewById(R.id.idUsuario);
+            mNombreView = (TextView) view.findViewById(R.id.nombreUsuario);
         }
 
         @Override

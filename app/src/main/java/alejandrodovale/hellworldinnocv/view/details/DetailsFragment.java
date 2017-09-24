@@ -117,6 +117,14 @@ public class DetailsFragment extends Fragment {
         mListener = null;
     }
 
+    public void removeImage() {
+        getActivity().findViewById(R.id.imageDetails).setVisibility(View.GONE);
+    }
+
+    public void addImage(){
+        getActivity().findViewById(R.id.imageDetails).setVisibility(View.VISIBLE);
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(UserEntity user);
     }

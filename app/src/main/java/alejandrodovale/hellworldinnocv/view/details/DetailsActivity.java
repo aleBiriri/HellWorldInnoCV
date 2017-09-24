@@ -1,6 +1,7 @@
 package alejandrodovale.hellworldinnocv.view.details;
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -132,4 +133,15 @@ public class DetailsActivity extends AppCompatActivity implements DetailsFragmen
         Controller.getInstance().updateUser(user,l);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int orientation = newConfig.orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            fragment.removeImage();
+        }
+        else if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            fragment.addImage();
+        }
+    }
 }

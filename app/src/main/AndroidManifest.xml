@@ -20,21 +20,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:configChanges="screenSize|orientation|screenLayout|navigation"
             android:name=".view.details.DetailsActivity"
             android:exported="true"
             android:label="@string/title_activity_details"
             android:parentActivityName=".view.getAll.GetAllActivity"
             android:theme="@style/AppTheme" />
         <activity
+            android:configChanges="screenSize|orientation|screenLayout|navigation"
             android:name=".view.newuser.NewUserActivity"
             android:exported="true"
             android:label="@string/title_activity_new_user_actvity"
             android:parentActivityName=".view.getAll.GetAllActivity"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".view.buscar.BuscarActivity"
-            android:label="@string/title_activity_buscar"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
